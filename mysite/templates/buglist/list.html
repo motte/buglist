@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bug List System</title>
+
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/boostrap.min.css">
+		<link rel="stylesheet" href="static/css/style.css">
+		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				{% for obj in cl.result_list %}
+				
+				// Done toggle
+				$('#done_{{ obj.pk }}').click(function(){
+					if($(this).html().indexOf("icon-on" != -1)) {
+						$action = "off";
+					}
+					else {
+						$action = "on";
+					}
+					
+					$.ajax({
+						type: "POST",
+						url: "/bug-list-master/onhold_done/done/" + $action + "/{{ obj.pk }}/",
+						success: function(action) {
+							$('#done_{{ obj.pk }}').html("<img class='btn' src='/media/img/admin/icon-" + $action + ".gif' />");
+						}
+					}) //ajax
+				
+				}); //done toggle
+			}); //$document ready
+		</script>
+    </head>
+
+    <body>
+        <h1>Bug List System!</h1>
+
+        <!-- JavaScript plugins (requires jQuery) -->
+        <!--<script src="http://code.jquery.com/jquery.js"></script>-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- <script src="js/bootstrap.min.js"></script>-->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+
+        <!-- Optionally enable responsive features in IE8. Respond.js can be obtained from https://github.com/scottjehl/Respond -->
+        <script src="js/respond.js"></script>
+
+        <div class="container">
+	    <div class="navbar navbar-fixed-top">
+	        BugList
+	    </div>
+	    
+	    {% for bug in bug_list %}
+	    <div class="row">
+	    {% endfor %}
+
+	    </div>
+	</div>
+
+    </body>
+</html>
