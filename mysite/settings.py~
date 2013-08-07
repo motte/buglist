@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'buglist',
-    'gunicorn', # this guy makes deploying django easy - does http stuff
 )
 
 # A sample logging configuration. The only tangible logging
